@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:GroceryListMobile.ViewModels"
+             xmlns:mvvm="clr-namespace:MvvmHelpers;assembly=MvvmHelpers"
+             xmlns:model="clr-namespace:GroceryListMobile.Models"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="GroceryListMobile.MainPage"
+             x:DataType="viewmodels:MainPageViewModel"
+             x:Name="Main">
+
+    <ContentPage.BindingContext>
+        <viewmodels:MainPageViewModel/>
+    </ContentPage.BindingContext>
+
+    <StackLayout>
+        <Label Text="Grocery List" FontSize="Large"/>
+        <Entry x:Name="itemEntry"
+               Placeholder="Enter item" 
+               Text="{Binding Input}"
+               xct:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference itemEntry}">
+            <Entry.Behaviors>
+                <xct:EventToCommandBehavior 
+                    EventName="Completed"
+                    Command="{Binding AddItemCommand}"/>
+            </Entry.Behaviors>
+        </Entry>
+        <ListView ItemsSource="{Binding UnorganizedCollection}"/>
+        <Button Text="Organize" Command="{Binding SortItemsCommand}"
+                Clicked="Button_Clicked"/>
+
+    </StackLayout>
+
+</ContentPage>

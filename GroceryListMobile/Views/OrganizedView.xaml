@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:GroceryListMobile.ViewModels"
+             xmlns:mvvm="clr-namespace:MvvmHelpers;assembly=MvvmHelpers"
+             xmlns:model="clr-namespace:GroceryListMobile.Models"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:DataType="viewmodels:OrganizedViewModel"
+             x:Class="GroceryListMobile.Views.OrganizedView"
+             x:Name="Organized">
+    <ContentPage.BindingContext>
+        <viewmodels:OrganizedViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+
+        <ListView ItemsSource="{Binding OGroupedList}"
+                  GroupDisplayBinding="{Binding Category}"
+                  IsGroupingEnabled="true">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label Text="{Binding .}"
+                               VerticalOptions="FillAndExpand"/>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>
